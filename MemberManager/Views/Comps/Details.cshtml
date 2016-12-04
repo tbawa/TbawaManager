@@ -1,0 +1,59 @@
+﻿@model MemberManager.Models.Comp
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CarnivalManagerLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Club.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comp1.CompName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comp1.CompName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comp2.CompName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comp2.CompName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompType.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CompID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

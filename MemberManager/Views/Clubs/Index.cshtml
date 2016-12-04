@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MemberManager.Models.Club>
+
+@{
+    ViewBag.Title = "Clubs";
+    Layout = "~/Views/Shared/_MemberManagerLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebsiteURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FacebookURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberClub)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryClub)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <span style="white-space:nowrap">@Html.ActionLink(item.Name, "Details", new { id = item.ClubId })</span>
+            </td>
+            <td>
+                <a href="@item.WebsiteURL">@Html.DisplayFor(modelItem => item.WebsiteURL)</a>
+            </td>
+            <td>
+                @if (item.FacebookURL != null && item.FacebookURL.Length > 0)
+                {
+                <a href="@item.FacebookURL"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberClub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryClub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>

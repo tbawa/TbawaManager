@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ContactManager.Models.Club>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WebsiteURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacebookURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberClub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryClub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WebsiteURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacebookURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberClub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryClub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClubId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClubId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClubId })
+        </td>
+    </tr>
+}
+
+</table>

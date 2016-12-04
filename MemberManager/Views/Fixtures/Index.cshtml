@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MemberManager.Models.CompFixture>
+
+@{
+    ViewBag.Title = "Fixtures";
+    Layout = "~/Views/Shared/_CarnivalManagerLayout.cshtml";
+}
+
+<h2>Fixtures</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Division
+        </th>
+        <th>
+            Diamond
+        </th>
+        <th>
+            Time Slot
+        </th>
+        <th>
+            Home Team
+        </th>
+        <th>
+            Away Team
+        </th>
+        <th>
+            Home Team Runs
+        </th>
+        <th>
+            Away Team Runs
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeTeam.CompDivision.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompDiamond.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompTimeSlot.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeTeam.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwayTeam.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeTeamRuns)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwayTeamRuns)
+        </td>
+        <td>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model List<MemberManager.Models.CompFixture>
+
+@{
+    ViewBag.Title = "Setup Finals";
+    Layout = "~/Views/Shared/_CarnivalManagerLayout.cshtml";
+}
+
+<h2>Setup Finals</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Finals", "Fixtures", FormMethod.Get, new { @class = "form-inline", @name="ChangeTimeSlot" }))
+        {
+        <p>@Html.Label("timeSlot", "Change Timeslot", new { @class = "control-label" }) @Html.DropDownList(name: "timeSlot", selectList: (SelectList)ViewBag.TimeSlots, htmlAttributes: new { @class = "form-control", @onchange = "document.ChangeTimeSlot.submit()" })</p>
+        }
+        @using (Html.BeginForm("Finals", "Fixtures", FormMethod.Post))
+        {
+            @Html.Hidden("timeSlot", (string)ViewBag.TimeSlot)
+            <table cellpadding="1">
+                <thead>
+                    <tr>
+                        <th>
+                            Division
+                        </th>
+                        <th>
+                            Diamond
+                        </th>
+                        <th>
+                            Home Team
+                        </th>
+                        <th>
+                            Away Team
+                        </th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                <tr>
+                    <td>
+                        @Html.Hidden("fixtures[" + @i + "].CompID", Model[i].CompID)
+                        @Html.Hidden("fixtures[" + @i + "].TimeSlot", Model[i].TimeSlot)
+                        @Html.Hidden("fixtures[" + @i + "].Game", Model[i].Game)
+                        @Html.Label("1", @Model[i].HomeTeam.CompDivision.Name, new { @class = "control-label" })
+                    </td>
+                    <td>
+                        @Html.TextBox("fixtures[" + @i + "].Diamond", Model[i].Diamond, new { @size = "4", @class = "form-control input-sm" })
+                    </td>
+                    <td>
+                        @Html.Label("fixtures[" + @i + "].HomeTeamID", Model[i].HomeTeam.Name, new { @class = "control-label" })
+                        @Html.Hidden("fixtures[" + @i + "].HomeTeamID", Model[i].HomeTeamID)
+                    </td>
+                    <td>
+                        @Html.Label("fixtures[" + @i + "].AwayTeamID", Model[i].AwayTeam.Name, new { @class = "control-label" })
+                        @Html.Hidden("fixtures[" + @i + "].AwayTeamID", Model[i].AwayTeamID)
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="4" align="right"><input type="Submit" class="btn btn-primary btn-lg" value="Save" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

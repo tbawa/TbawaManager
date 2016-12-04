@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MemberManager.Models.Comp>
+
+@{
+    ViewBag.Title = "Carnivals";
+    Layout = "~/Views/Shared/_CarnivalManagerLayout.cshtml";
+}
+
+<h2>Carnivals</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Carnival
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.CompName, "Manage", new { id = item.CompID }) |
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CompID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CompID }) |
+            </td>
+        </tr>
+    }
+
+</table>

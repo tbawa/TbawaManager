@@ -1,0 +1,2754 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MembersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Affiliation">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="AffiliationDate" Type="date" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="NumberOfTeams" Type="int" />
+          <Property Name="NumberOfPlayers" Type="int" />
+          <Property Name="NumberOfVolunteers" Type="int" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LegalName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="100" />
+          <Property Name="FacebookURL" Type="nvarchar" MaxLength="100" />
+          <Property Name="MemberClub" Type="bit" Nullable="false" />
+          <Property Name="CountryClub" Type="bit" Nullable="false" />
+          <Property Name="MemberOf" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="200" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="200" />
+          <Property Name="Locality" Type="varchar" MaxLength="200" />
+          <Property Name="Postcode" Type="char" MaxLength="4" />
+          <Property Name="State" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="ClubContact">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ClubRolePerson">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Comp">
+          <Key>
+            <PropertyRef Name="CompID" />
+          </Key>
+          <Property Name="CompID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompTypeID" Type="int" Nullable="false" />
+          <Property Name="HostClubID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompClub">
+          <Key>
+            <PropertyRef Name="CompClubID" />
+          </Key>
+          <Property Name="CompClubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="ClubID" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompDate">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompDiamond">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompDiamondAllocation">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="DiamondNumber" />
+            <PropertyRef Name="GameNumber" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DiamondNumber" Type="int" Nullable="false" />
+          <Property Name="GameNumber" Type="int" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompDivision">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompFixture">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+          <Property Name="Game" Type="int" Nullable="false" />
+          <Property Name="HomeTeamID" Type="int" />
+          <Property Name="AwayTeamID" Type="int" />
+          <Property Name="HomeTeamMatchCode" Type="char" MaxLength="1" />
+          <Property Name="HomeTeamWinLoss" Type="char" MaxLength="1" />
+          <Property Name="AwayTeamMatchCode" Type="char" MaxLength="1" />
+          <Property Name="AwayTeamWinLoss" Type="char" MaxLength="1" />
+          <Property Name="HomeTeamRuns" Type="int" />
+          <Property Name="AwayTeamRuns" Type="int" />
+          <Property Name="PlateUmpireNo" Type="int" />
+          <Property Name="FirstBaseUmpireNo" Type="int" />
+          <Property Name="SecondBaseUmpireNo" Type="int" />
+        </EntityType>
+        <EntityType Name="CompFixtureTemplate">
+          <Key>
+            <PropertyRef Name="CompTypeID" />
+            <PropertyRef Name="NumberOfTeams" />
+            <PropertyRef Name="GameNumber" />
+            <PropertyRef Name="DiamondNumber" />
+          </Key>
+          <Property Name="CompTypeID" Type="int" Nullable="false" />
+          <Property Name="NumberOfTeams" Type="int" Nullable="false" />
+          <Property Name="GameNumber" Type="int" Nullable="false" />
+          <Property Name="DiamondNumber" Type="int" Nullable="false" />
+          <Property Name="HomeTeamRank" Type="int" Nullable="false" />
+          <Property Name="AwayTeamRank" Type="int" Nullable="false" />
+          <Property Name="MatchCode" Type="char" MaxLength="1" />
+          <Property Name="HomeTeamMatchCode" Type="char" MaxLength="1" />
+          <Property Name="HomeTeamWinLoss" Type="char" MaxLength="1" />
+          <Property Name="AwayTeamMatchCode" Type="char" MaxLength="1" />
+          <Property Name="AwayTeamWinLoss" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CompGroup">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompTeam">
+          <Key>
+            <PropertyRef Name="CompTeamID" />
+          </Key>
+          <Property Name="CompTeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="CompClubID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="char" MaxLength="1" />
+          <Property Name="Rank" Type="int" />
+        </EntityType>
+        <EntityType Name="CompTimeSlot">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Day" Type="int" Nullable="false" />
+          <Property Name="TimeSlotInDay" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompType">
+          <Key>
+            <PropertyRef Name="CompTypeID" />
+          </Key>
+          <Property Name="CompTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompUmpireAllocation">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+          <Property Name="PlateUmpireCompTeamID" Type="int" Nullable="false" />
+          <Property Name="FirstBaseUmpireCompTeamID" Type="int" />
+          <Property Name="SecondBaseUmpireCompTeamID" Type="int" />
+        </EntityType>
+        <EntityType Name="OfficeBearer">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Deceased" Type="bit" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="200" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="200" />
+          <Property Name="Locality" Type="varchar" MaxLength="200" />
+          <Property Name="Postcode" Type="char" MaxLength="4" />
+          <Property Name="State" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="TbawaOnly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.BasicLadder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BasicLadder">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="CompTeamID" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="CompTeamID" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="GamesPlayed" Type="int" />
+          <Property Name="GamesWon" Type="int" />
+          <Property Name="GamesLost" Type="int" />
+          <Property Name="GamesDrawn" Type="int" />
+          <Property Name="RunsFor" Type="int" />
+          <Property Name="RunsAgainst" Type="int" />
+          <Property Name="Percentage" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.CalculateFinalRoundFixtures_Lightning' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CalculateFinalRoundFixtures_Lightning">
+          <Key>
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="HomeTeamID" />
+            <PropertyRef Name="AwayTeamID" />
+          </Key>
+          <Property Name="CompID" Type="int" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+          <Property Name="Game" Type="int" Nullable="false" />
+          <Property Name="HomeTeamID" Type="int" Nullable="false" />
+          <Property Name="AwayTeamID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.ClubContactView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ClubContactView">
+          <Key>
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+          </Key>
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.FullLadder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FullLadder">
+          <Key>
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+          </Key>
+          <Property Name="CompID" Type="int" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="char" MaxLength="1" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="GamesPlayed" Type="int" />
+          <Property Name="GamesWon" Type="int" />
+          <Property Name="GamesLost" Type="int" />
+          <Property Name="GamesDrawn" Type="int" />
+          <Property Name="RunsFor" Type="int" />
+          <Property Name="RunsAgainst" Type="int" />
+          <Property Name="Percentage" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.FullLadderFinalRound' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FullLadderFinalRound">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="char" MaxLength="1" />
+          <Property Name="FinalGame" Type="int" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="GamesPlayed" Type="int" />
+          <Property Name="GamesWon" Type="int" />
+          <Property Name="GamesLost" Type="int" />
+          <Property Name="GamesDrawn" Type="int" />
+          <Property Name="RunsFor" Type="int" />
+          <Property Name="RunsAgainst" Type="int" />
+          <Property Name="Percentage" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.ScoreSlips' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ScoreSlips">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Diamond" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="HomeTeam" />
+            <PropertyRef Name="MatchCode" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="CompID" Type="int" Nullable="false" />
+          <Property Name="TimeSlot" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Diamond" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Game" Type="int" Nullable="false" />
+          <Property Name="HomeTeam" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AwayTeam" Type="nvarchar" MaxLength="100" />
+          <Property Name="MatchCode" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.TeamLadderAndGames' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TeamLadderAndGames">
+          <Key>
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="char" MaxLength="1" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="GamesPlayed" Type="int" />
+          <Property Name="GamesWon" Type="int" />
+          <Property Name="GamesLost" Type="int" />
+          <Property Name="GamesDrawn" Type="int" />
+          <Property Name="RunsFor" Type="int" />
+          <Property Name="RunsAgainst" Type="int" />
+          <Property Name="Percentage" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Game" Type="int" Nullable="false" />
+          <Property Name="TeamRuns" Type="int" />
+          <Property Name="OppositionRuns" Type="int" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="CompID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'tbawa.dbo.TeamLadderAndGames_Crosstab' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TeamLadderAndGames_Crosstab">
+          <Key>
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Division" Type="char" MaxLength="1" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClubName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="GamesPlayed" Type="int" />
+          <Property Name="GamesWon" Type="int" />
+          <Property Name="GamesLost" Type="int" />
+          <Property Name="GamesDrawn" Type="int" />
+          <Property Name="RunsFor" Type="int" />
+          <Property Name="RunsAgainst" Type="int" />
+          <Property Name="Percentage" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="CompID" Type="int" />
+          <Property Name="ID1" Type="varchar" MaxLength="21" />
+          <Property Name="ID2" Type="varchar" MaxLength="21" />
+          <Property Name="ID3" Type="varchar" MaxLength="21" />
+        </EntityType>
+        <Association Name="Affiliation_FK1">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Affiliation" Type="Self.Affiliation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Affiliation">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Affiliation_FK2">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Affiliation" Type="Self.Affiliation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Affiliation">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Club_FK1">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Club1" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Club1">
+              <PropertyRef Name="MemberOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK1">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK2">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK3">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubRolePerson_FK1">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubRolePerson" Type="Self.ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubRolePerson_FK2">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="ClubRolePerson" Type="Self.ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubRolePerson_FK3">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="ClubRolePerson" Type="Self.ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Comp" Type="Self.Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Comp">
+              <PropertyRef Name="HostClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="Comp1" Type="Self.Comp" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="Comp1">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_CompType">
+          <End Role="CompType" Type="Self.CompType" Multiplicity="1" />
+          <End Role="Comp" Type="Self.Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompType">
+              <PropertyRef Name="CompTypeID" />
+            </Principal>
+            <Dependent Role="Comp">
+              <PropertyRef Name="CompTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompClub_Club">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="CompClub" Type="Self.CompClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="CompClub">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompClub_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="CompClub" Type="Self.CompClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompClub">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDate_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="CompDate" Type="Self.CompDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompDate">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamond_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="CompDiamond" Type="Self.CompDiamond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamondAllocation_CompDivision">
+          <End Role="CompDivision" Type="Self.CompDivision" Multiplicity="1" />
+          <End Role="CompDiamondAllocation" Type="Self.CompDiamondAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="CompDiamondAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamondAllocation_CompTimeslot">
+          <End Role="CompTimeSlot" Type="Self.CompTimeSlot" Multiplicity="1" />
+          <End Role="CompDiamondAllocation" Type="Self.CompDiamondAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompDiamondAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDivision_CompGroup">
+          <End Role="CompGroup" Type="Self.CompGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompDivision" Type="Self.CompDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompGroup">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="CompFixture" Type="Self.CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompAwayTeam">
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="0..1" />
+          <End Role="CompFixture" Type="Self.CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTeam">
+              <PropertyRef Name="CompTeamID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="AwayTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompDIamond">
+          <End Role="CompDiamond" Type="Self.CompDiamond" Multiplicity="1" />
+          <End Role="CompFixture" Type="Self.CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompHomeTeam">
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="0..1" />
+          <End Role="CompFixture" Type="Self.CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTeam">
+              <PropertyRef Name="CompTeamID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="HomeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompTimeSlot">
+          <End Role="CompTimeSlot" Type="Self.CompTimeSlot" Multiplicity="1" />
+          <End Role="CompFixture" Type="Self.CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixtureTemplate_CompType">
+          <End Role="CompType" Type="Self.CompType" Multiplicity="1" />
+          <End Role="CompFixtureTemplate" Type="Self.CompFixtureTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompType">
+              <PropertyRef Name="CompTypeID" />
+            </Principal>
+            <Dependent Role="CompFixtureTemplate">
+              <PropertyRef Name="CompTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_Comp">
+          <End Role="Comp" Type="Self.Comp" Multiplicity="1" />
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompClub">
+          <End Role="CompClub" Type="Self.CompClub" Multiplicity="1" />
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompClub">
+              <PropertyRef Name="CompClubID" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompDivision">
+          <End Role="CompDivision" Type="Self.CompDivision" Multiplicity="0..1" />
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompGroup">
+          <End Role="CompGroup" Type="Self.CompGroup" Multiplicity="0..1" />
+          <End Role="CompTeam" Type="Self.CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompGroup">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTimeSlot_CompDate">
+          <End Role="CompDate" Type="Self.CompDate" Multiplicity="1" />
+          <End Role="CompTimeSlot" Type="Self.CompTimeSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDate">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompUmpireAllocation_CompDiamond">
+          <End Role="CompDiamond" Type="Self.CompDiamond" Multiplicity="1" />
+          <End Role="CompUmpireAllocation" Type="Self.CompUmpireAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Principal>
+            <Dependent Role="CompUmpireAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompUmpireAllocation_CompTimeSlot">
+          <End Role="CompTimeSlot" Type="Self.CompTimeSlot" Multiplicity="1" />
+          <End Role="CompUmpireAllocation" Type="Self.CompUmpireAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompUmpireAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OfficeBearer_FK1">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="OfficeBearer" Type="Self.OfficeBearer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="OfficeBearer">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OfficeBearer_FK2">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="OfficeBearer" Type="Self.OfficeBearer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="OfficeBearer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MembersModelStoreContainer">
+          <EntitySet Name="Affiliation" EntityType="Self.Affiliation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubContact" EntityType="Self.ClubContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubRolePerson" EntityType="Self.ClubRolePerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comp" EntityType="Self.Comp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompClub" EntityType="Self.CompClub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompDate" EntityType="Self.CompDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompDiamond" EntityType="Self.CompDiamond" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompDiamondAllocation" EntityType="Self.CompDiamondAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompDivision" EntityType="Self.CompDivision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompFixture" EntityType="Self.CompFixture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompFixtureTemplate" EntityType="Self.CompFixtureTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompGroup" EntityType="Self.CompGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompTeam" EntityType="Self.CompTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompTimeSlot" EntityType="Self.CompTimeSlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompType" EntityType="Self.CompType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompUmpireAllocation" EntityType="Self.CompUmpireAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficeBearer" EntityType="Self.OfficeBearer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Season" EntityType="Self.Season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BasicLadder" EntityType="Self.BasicLadder" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BasicLadder].[CompID] AS [CompID], 
+    [BasicLadder].[CompTeamID] AS [CompTeamID], 
+    [BasicLadder].[Grade] AS [Grade], 
+    [BasicLadder].[Division] AS [Division], 
+    [BasicLadder].[Name] AS [Name], 
+    [BasicLadder].[Points] AS [Points], 
+    [BasicLadder].[GamesPlayed] AS [GamesPlayed], 
+    [BasicLadder].[GamesWon] AS [GamesWon], 
+    [BasicLadder].[GamesLost] AS [GamesLost], 
+    [BasicLadder].[GamesDrawn] AS [GamesDrawn], 
+    [BasicLadder].[RunsFor] AS [RunsFor], 
+    [BasicLadder].[RunsAgainst] AS [RunsAgainst], 
+    [BasicLadder].[Percentage] AS [Percentage]
+    FROM [dbo].[BasicLadder] AS [BasicLadder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CalculateFinalRoundFixtures_Lightning" EntityType="Self.CalculateFinalRoundFixtures_Lightning" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CalculateFinalRoundFixtures_Lightning].[CompID] AS [CompID], 
+    [CalculateFinalRoundFixtures_Lightning].[TimeSlot] AS [TimeSlot], 
+    [CalculateFinalRoundFixtures_Lightning].[Diamond] AS [Diamond], 
+    [CalculateFinalRoundFixtures_Lightning].[Game] AS [Game], 
+    [CalculateFinalRoundFixtures_Lightning].[HomeTeamID] AS [HomeTeamID], 
+    [CalculateFinalRoundFixtures_Lightning].[AwayTeamID] AS [AwayTeamID]
+    FROM [dbo].[CalculateFinalRoundFixtures_Lightning] AS [CalculateFinalRoundFixtures_Lightning]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ClubContactView" EntityType="Self.ClubContactView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ClubContactView].[ClubName] AS [ClubName], 
+    [ClubContactView].[RoleName] AS [RoleName], 
+    [ClubContactView].[FirstName] AS [FirstName], 
+    [ClubContactView].[LastName] AS [LastName], 
+    [ClubContactView].[Email] AS [Email], 
+    [ClubContactView].[Mobile] AS [Mobile]
+    FROM [dbo].[ClubContactView] AS [ClubContactView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FullLadder" EntityType="Self.FullLadder" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FullLadder].[CompID] AS [CompID], 
+    [FullLadder].[Grade] AS [Grade], 
+    [FullLadder].[Division] AS [Division], 
+    [FullLadder].[TeamID] AS [TeamID], 
+    [FullLadder].[TeamName] AS [TeamName], 
+    [FullLadder].[ClubName] AS [ClubName], 
+    [FullLadder].[Points] AS [Points], 
+    [FullLadder].[GamesPlayed] AS [GamesPlayed], 
+    [FullLadder].[GamesWon] AS [GamesWon], 
+    [FullLadder].[GamesLost] AS [GamesLost], 
+    [FullLadder].[GamesDrawn] AS [GamesDrawn], 
+    [FullLadder].[RunsFor] AS [RunsFor], 
+    [FullLadder].[RunsAgainst] AS [RunsAgainst], 
+    [FullLadder].[Percentage] AS [Percentage]
+    FROM [dbo].[FullLadder] AS [FullLadder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FullLadderFinalRound" EntityType="Self.FullLadderFinalRound" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FullLadderFinalRound].[CompID] AS [CompID], 
+    [FullLadderFinalRound].[Grade] AS [Grade], 
+    [FullLadderFinalRound].[Division] AS [Division], 
+    [FullLadderFinalRound].[FinalGame] AS [FinalGame], 
+    [FullLadderFinalRound].[TeamID] AS [TeamID], 
+    [FullLadderFinalRound].[TeamName] AS [TeamName], 
+    [FullLadderFinalRound].[ClubName] AS [ClubName], 
+    [FullLadderFinalRound].[Points] AS [Points], 
+    [FullLadderFinalRound].[GamesPlayed] AS [GamesPlayed], 
+    [FullLadderFinalRound].[GamesWon] AS [GamesWon], 
+    [FullLadderFinalRound].[GamesLost] AS [GamesLost], 
+    [FullLadderFinalRound].[GamesDrawn] AS [GamesDrawn], 
+    [FullLadderFinalRound].[RunsFor] AS [RunsFor], 
+    [FullLadderFinalRound].[RunsAgainst] AS [RunsAgainst], 
+    [FullLadderFinalRound].[Percentage] AS [Percentage]
+    FROM [dbo].[FullLadderFinalRound] AS [FullLadderFinalRound]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ScoreSlips" EntityType="Self.ScoreSlips" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ScoreSlips].[CompID] AS [CompID], 
+    [ScoreSlips].[TimeSlot] AS [TimeSlot], 
+    [ScoreSlips].[Date] AS [Date], 
+    [ScoreSlips].[Time] AS [Time], 
+    [ScoreSlips].[Diamond] AS [Diamond], 
+    [ScoreSlips].[Grade] AS [Grade], 
+    [ScoreSlips].[Division] AS [Division], 
+    [ScoreSlips].[DisplayName] AS [DisplayName], 
+    [ScoreSlips].[Game] AS [Game], 
+    [ScoreSlips].[HomeTeam] AS [HomeTeam], 
+    [ScoreSlips].[AwayTeam] AS [AwayTeam], 
+    [ScoreSlips].[MatchCode] AS [MatchCode]
+    FROM [dbo].[ScoreSlips] AS [ScoreSlips]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TeamLadderAndGames" EntityType="Self.TeamLadderAndGames" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TeamLadderAndGames].[Grade] AS [Grade], 
+    [TeamLadderAndGames].[Division] AS [Division], 
+    [TeamLadderAndGames].[DisplayName] AS [DisplayName], 
+    [TeamLadderAndGames].[TeamName] AS [TeamName], 
+    [TeamLadderAndGames].[ClubName] AS [ClubName], 
+    [TeamLadderAndGames].[Points] AS [Points], 
+    [TeamLadderAndGames].[GamesPlayed] AS [GamesPlayed], 
+    [TeamLadderAndGames].[GamesWon] AS [GamesWon], 
+    [TeamLadderAndGames].[GamesLost] AS [GamesLost], 
+    [TeamLadderAndGames].[GamesDrawn] AS [GamesDrawn], 
+    [TeamLadderAndGames].[RunsFor] AS [RunsFor], 
+    [TeamLadderAndGames].[RunsAgainst] AS [RunsAgainst], 
+    [TeamLadderAndGames].[Percentage] AS [Percentage], 
+    [TeamLadderAndGames].[Game] AS [Game], 
+    [TeamLadderAndGames].[TeamRuns] AS [TeamRuns], 
+    [TeamLadderAndGames].[OppositionRuns] AS [OppositionRuns], 
+    [TeamLadderAndGames].[TeamID] AS [TeamID], 
+    [TeamLadderAndGames].[CompID] AS [CompID]
+    FROM [dbo].[TeamLadderAndGames] AS [TeamLadderAndGames]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TeamLadderAndGames_Crosstab" EntityType="Self.TeamLadderAndGames_Crosstab" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TeamLadderAndGames_Crosstab].[Grade] AS [Grade], 
+    [TeamLadderAndGames_Crosstab].[Division] AS [Division], 
+    [TeamLadderAndGames_Crosstab].[DisplayName] AS [DisplayName], 
+    [TeamLadderAndGames_Crosstab].[TeamName] AS [TeamName], 
+    [TeamLadderAndGames_Crosstab].[ClubName] AS [ClubName], 
+    [TeamLadderAndGames_Crosstab].[Points] AS [Points], 
+    [TeamLadderAndGames_Crosstab].[GamesPlayed] AS [GamesPlayed], 
+    [TeamLadderAndGames_Crosstab].[GamesWon] AS [GamesWon], 
+    [TeamLadderAndGames_Crosstab].[GamesLost] AS [GamesLost], 
+    [TeamLadderAndGames_Crosstab].[GamesDrawn] AS [GamesDrawn], 
+    [TeamLadderAndGames_Crosstab].[RunsFor] AS [RunsFor], 
+    [TeamLadderAndGames_Crosstab].[RunsAgainst] AS [RunsAgainst], 
+    [TeamLadderAndGames_Crosstab].[Percentage] AS [Percentage], 
+    [TeamLadderAndGames_Crosstab].[TeamID] AS [TeamID], 
+    [TeamLadderAndGames_Crosstab].[CompID] AS [CompID], 
+    [TeamLadderAndGames_Crosstab].[ID1] AS [ID1], 
+    [TeamLadderAndGames_Crosstab].[ID2] AS [ID2], 
+    [TeamLadderAndGames_Crosstab].[ID3] AS [ID3]
+    FROM [dbo].[TeamLadderAndGames_Crosstab] AS [TeamLadderAndGames_Crosstab]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Affiliation_FK1" Association="Self.Affiliation_FK1">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Affiliation" EntitySet="Affiliation" />
+          </AssociationSet>
+          <AssociationSet Name="Affiliation_FK2" Association="Self.Affiliation_FK2">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Affiliation" EntitySet="Affiliation" />
+          </AssociationSet>
+          <AssociationSet Name="Club_FK1" Association="Self.Club_FK1">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Club1" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK1" Association="Self.ClubContact_FK1">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubContact" EntitySet="ClubContact" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK2" Association="Self.ClubContact_FK2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="ClubContact" EntitySet="ClubContact" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK3" Association="Self.ClubContact_FK3">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="ClubContact" EntitySet="ClubContact" />
+          </AssociationSet>
+          <AssociationSet Name="ClubRolePerson_FK1" Association="Self.ClubRolePerson_FK1">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePerson" />
+          </AssociationSet>
+          <AssociationSet Name="ClubRolePerson_FK2" Association="Self.ClubRolePerson_FK2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePerson" />
+          </AssociationSet>
+          <AssociationSet Name="ClubRolePerson_FK3" Association="Self.ClubRolePerson_FK3">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_Club" Association="Self.FK_Comp_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Comp" EntitySet="Comp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_Comp" Association="Self.FK_Comp_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="Comp1" EntitySet="Comp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_CompType" Association="Self.FK_Comp_CompType">
+            <End Role="CompType" EntitySet="CompType" />
+            <End Role="Comp" EntitySet="Comp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompClub_Club" Association="Self.FK_CompClub_Club">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="CompClub" EntitySet="CompClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompClub_Comp" Association="Self.FK_CompClub_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="CompClub" EntitySet="CompClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDate_Comp" Association="Self.FK_CompDate_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="CompDate" EntitySet="CompDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamond_Comp" Association="Self.FK_CompDiamond_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="CompDiamond" EntitySet="CompDiamond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamondAllocation_CompDivision" Association="Self.FK_CompDiamondAllocation_CompDivision">
+            <End Role="CompDivision" EntitySet="CompDivision" />
+            <End Role="CompDiamondAllocation" EntitySet="CompDiamondAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamondAllocation_CompTimeslot" Association="Self.FK_CompDiamondAllocation_CompTimeslot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlot" />
+            <End Role="CompDiamondAllocation" EntitySet="CompDiamondAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDivision_CompGroup" Association="Self.FK_CompDivision_CompGroup">
+            <End Role="CompGroup" EntitySet="CompGroup" />
+            <End Role="CompDivision" EntitySet="CompDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_Comp" Association="Self.FK_CompFixture_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="CompFixture" EntitySet="CompFixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompAwayTeam" Association="Self.FK_CompFixture_CompAwayTeam">
+            <End Role="CompTeam" EntitySet="CompTeam" />
+            <End Role="CompFixture" EntitySet="CompFixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompDIamond" Association="Self.FK_CompFixture_CompDIamond">
+            <End Role="CompDiamond" EntitySet="CompDiamond" />
+            <End Role="CompFixture" EntitySet="CompFixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompHomeTeam" Association="Self.FK_CompFixture_CompHomeTeam">
+            <End Role="CompTeam" EntitySet="CompTeam" />
+            <End Role="CompFixture" EntitySet="CompFixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompTimeSlot" Association="Self.FK_CompFixture_CompTimeSlot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlot" />
+            <End Role="CompFixture" EntitySet="CompFixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixtureTemplate_CompType" Association="Self.FK_CompFixtureTemplate_CompType">
+            <End Role="CompType" EntitySet="CompType" />
+            <End Role="CompFixtureTemplate" EntitySet="CompFixtureTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_Comp" Association="Self.FK_CompTeam_Comp">
+            <End Role="Comp" EntitySet="Comp" />
+            <End Role="CompTeam" EntitySet="CompTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompClub" Association="Self.FK_CompTeam_CompClub">
+            <End Role="CompClub" EntitySet="CompClub" />
+            <End Role="CompTeam" EntitySet="CompTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompDivision" Association="Self.FK_CompTeam_CompDivision">
+            <End Role="CompDivision" EntitySet="CompDivision" />
+            <End Role="CompTeam" EntitySet="CompTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompGroup" Association="Self.FK_CompTeam_CompGroup">
+            <End Role="CompGroup" EntitySet="CompGroup" />
+            <End Role="CompTeam" EntitySet="CompTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTimeSlot_CompDate" Association="Self.FK_CompTimeSlot_CompDate">
+            <End Role="CompDate" EntitySet="CompDate" />
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompUmpireAllocation_CompDiamond" Association="Self.FK_CompUmpireAllocation_CompDiamond">
+            <End Role="CompDiamond" EntitySet="CompDiamond" />
+            <End Role="CompUmpireAllocation" EntitySet="CompUmpireAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompUmpireAllocation_CompTimeSlot" Association="Self.FK_CompUmpireAllocation_CompTimeSlot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlot" />
+            <End Role="CompUmpireAllocation" EntitySet="CompUmpireAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="OfficeBearer_FK1" Association="Self.OfficeBearer_FK1">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="OfficeBearer" EntitySet="OfficeBearer" />
+          </AssociationSet>
+          <AssociationSet Name="OfficeBearer_FK2" Association="Self.OfficeBearer_FK2">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="OfficeBearer" EntitySet="OfficeBearer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MembersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Affiliation">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="AffiliationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumberOfTeams" Type="Int32" />
+          <Property Name="NumberOfPlayers" Type="Int32" />
+          <Property Name="NumberOfVolunteers" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.Affiliation_FK1" FromRole="Affiliation" ToRole="Role" />
+          <NavigationProperty Name="Person" Relationship="Self.Affiliation_FK2" FromRole="Affiliation" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LegalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MemberClub" Type="Boolean" Nullable="false" />
+          <Property Name="CountryClub" Type="Boolean" Nullable="false" />
+          <Property Name="MemberOf" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Locality" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club1" Relationship="Self.Club_FK1" FromRole="Club" ToRole="Club1" />
+          <NavigationProperty Name="Club2" Relationship="Self.Club_FK1" FromRole="Club1" ToRole="Club" />
+          <NavigationProperty Name="ClubContacts" Relationship="Self.ClubContact_FK1" FromRole="Club" ToRole="ClubContact" />
+          <NavigationProperty Name="ClubRolePersons" Relationship="MembersModel.ClubRolePerson_FK1" FromRole="Club" ToRole="ClubRolePerson" />
+          <NavigationProperty Name="Comps" Relationship="MembersModel.FK_Comp_Club" FromRole="Club" ToRole="Comp" />
+          <NavigationProperty Name="CompClubs" Relationship="MembersModel.FK_CompClub_Club" FromRole="Club" ToRole="CompClub" />
+        </EntityType>
+        <EntityType Name="ClubContact">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Club" Relationship="Self.ClubContact_FK1" FromRole="ClubContact" ToRole="Club" />
+          <NavigationProperty Name="Role" Relationship="Self.ClubContact_FK2" FromRole="ClubContact" ToRole="Role" />
+          <NavigationProperty Name="Person" Relationship="Self.ClubContact_FK3" FromRole="ClubContact" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="OfficeBearer">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="Self.OfficeBearer_FK1" FromRole="OfficeBearer" ToRole="Role" />
+          <NavigationProperty Name="Person" Relationship="Self.OfficeBearer_FK2" FromRole="OfficeBearer" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Deceased" Type="Boolean" />
+          <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Locality" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Affiliations" Relationship="Self.Affiliation_FK2" FromRole="Person" ToRole="Affiliation" />
+          <NavigationProperty Name="ClubContacts" Relationship="Self.ClubContact_FK3" FromRole="Person" ToRole="ClubContact" />
+          <NavigationProperty Name="OfficeBearers" Relationship="Self.OfficeBearer_FK2" FromRole="Person" ToRole="OfficeBearer" />
+          <NavigationProperty Name="ClubRolePersons" Relationship="MembersModel.ClubRolePerson_FK3" FromRole="Person" ToRole="ClubRolePerson" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="TbawaOnly" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Affiliations" Relationship="Self.Affiliation_FK1" FromRole="Role" ToRole="Affiliation" />
+          <NavigationProperty Name="ClubContacts" Relationship="Self.ClubContact_FK2" FromRole="Role" ToRole="ClubContact" />
+          <NavigationProperty Name="OfficeBearers" Relationship="Self.OfficeBearer_FK1" FromRole="Role" ToRole="OfficeBearer" />
+          <NavigationProperty Name="ClubRolePersons" Relationship="MembersModel.ClubRolePerson_FK2" FromRole="Role" ToRole="ClubRolePerson" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="Affiliation_FK1">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Affiliation" Type="Self.Affiliation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Affiliation">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Affiliation_FK2">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Affiliation" Type="Self.Affiliation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Affiliation">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Club_FK1">
+          <End Role="Club" Type="Self.Club" Multiplicity="0..1" />
+          <End Role="Club1" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Club1">
+              <PropertyRef Name="MemberOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK1">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK2">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubContact_FK3">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="ClubContact" Type="Self.ClubContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="ClubContact">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OfficeBearer_FK1">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="OfficeBearer" Type="Self.OfficeBearer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="OfficeBearer">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OfficeBearer_FK2">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="OfficeBearer" Type="Self.OfficeBearer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="OfficeBearer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tbawaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Affiliations" EntityType="Self.Affiliation" />
+          <EntitySet Name="Clubs" EntityType="Self.Club" />
+          <EntitySet Name="ClubContacts" EntityType="Self.ClubContact" />
+          <EntitySet Name="OfficeBearers" EntityType="Self.OfficeBearer" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Seasons" EntityType="Self.Season" />
+          <AssociationSet Name="Affiliation_FK1" Association="Self.Affiliation_FK1">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Affiliation" EntitySet="Affiliations" />
+          </AssociationSet>
+          <AssociationSet Name="Affiliation_FK2" Association="Self.Affiliation_FK2">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Affiliation" EntitySet="Affiliations" />
+          </AssociationSet>
+          <AssociationSet Name="Club_FK1" Association="Self.Club_FK1">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Club1" EntitySet="Clubs" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK1" Association="Self.ClubContact_FK1">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="ClubContact" EntitySet="ClubContacts" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK2" Association="Self.ClubContact_FK2">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="ClubContact" EntitySet="ClubContacts" />
+          </AssociationSet>
+          <AssociationSet Name="ClubContact_FK3" Association="Self.ClubContact_FK3">
+            <End Role="Person" EntitySet="People" />
+            <End Role="ClubContact" EntitySet="ClubContacts" />
+          </AssociationSet>
+          <AssociationSet Name="OfficeBearer_FK1" Association="Self.OfficeBearer_FK1">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="OfficeBearer" EntitySet="OfficeBearers" />
+          </AssociationSet>
+          <AssociationSet Name="OfficeBearer_FK2" Association="Self.OfficeBearer_FK2">
+            <End Role="Person" EntitySet="People" />
+            <End Role="OfficeBearer" EntitySet="OfficeBearers" />
+          </AssociationSet>
+          <EntitySet Name="ClubRolePersons" EntityType="MembersModel.ClubRolePerson" />
+          <EntitySet Name="Comps" EntityType="MembersModel.Comp" />
+          <EntitySet Name="CompClubs" EntityType="MembersModel.CompClub" />
+          <EntitySet Name="CompDates" EntityType="MembersModel.CompDate" />
+          <EntitySet Name="CompDiamonds" EntityType="MembersModel.CompDiamond" />
+          <EntitySet Name="CompDiamondAllocations" EntityType="MembersModel.CompDiamondAllocation" />
+          <EntitySet Name="CompDivisions" EntityType="MembersModel.CompDivision" />
+          <EntitySet Name="CompFixtures" EntityType="MembersModel.CompFixture" />
+          <EntitySet Name="CompFixtureTemplates" EntityType="MembersModel.CompFixtureTemplate" />
+          <EntitySet Name="CompGroups" EntityType="MembersModel.CompGroup" />
+          <EntitySet Name="CompTeams" EntityType="MembersModel.CompTeam" />
+          <EntitySet Name="CompTimeSlots" EntityType="MembersModel.CompTimeSlot" />
+          <EntitySet Name="CompTypes" EntityType="MembersModel.CompType" />
+          <EntitySet Name="CompUmpireAllocations" EntityType="MembersModel.CompUmpireAllocation" />
+          <AssociationSet Name="ClubRolePerson_FK1" Association="MembersModel.ClubRolePerson_FK1">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_Club" Association="MembersModel.FK_Comp_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Comp" EntitySet="Comps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompClub_Club" Association="MembersModel.FK_CompClub_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="CompClub" EntitySet="CompClubs" />
+          </AssociationSet>
+          <AssociationSet Name="ClubRolePerson_FK2" Association="MembersModel.ClubRolePerson_FK2">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePersons" />
+          </AssociationSet>
+          <AssociationSet Name="ClubRolePerson_FK3" Association="MembersModel.ClubRolePerson_FK3">
+            <End Role="Person" EntitySet="People" />
+            <End Role="ClubRolePerson" EntitySet="ClubRolePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_Comp" Association="MembersModel.FK_Comp_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="Comp1" EntitySet="Comps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comp_CompType" Association="MembersModel.FK_Comp_CompType">
+            <End Role="CompType" EntitySet="CompTypes" />
+            <End Role="Comp" EntitySet="Comps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompClub_Comp" Association="MembersModel.FK_CompClub_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="CompClub" EntitySet="CompClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDate_Comp" Association="MembersModel.FK_CompDate_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="CompDate" EntitySet="CompDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamond_Comp" Association="MembersModel.FK_CompDiamond_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="CompDiamond" EntitySet="CompDiamonds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_Comp" Association="MembersModel.FK_CompFixture_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="CompFixture" EntitySet="CompFixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_Comp" Association="MembersModel.FK_CompTeam_Comp">
+            <End Role="Comp" EntitySet="Comps" />
+            <End Role="CompTeam" EntitySet="CompTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompClub" Association="MembersModel.FK_CompTeam_CompClub">
+            <End Role="CompClub" EntitySet="CompClubs" />
+            <End Role="CompTeam" EntitySet="CompTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTimeSlot_CompDate" Association="MembersModel.FK_CompTimeSlot_CompDate">
+            <End Role="CompDate" EntitySet="CompDates" />
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompDIamond" Association="MembersModel.FK_CompFixture_CompDIamond">
+            <End Role="CompDiamond" EntitySet="CompDiamonds" />
+            <End Role="CompFixture" EntitySet="CompFixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompUmpireAllocation_CompDiamond" Association="MembersModel.FK_CompUmpireAllocation_CompDiamond">
+            <End Role="CompDiamond" EntitySet="CompDiamonds" />
+            <End Role="CompUmpireAllocation" EntitySet="CompUmpireAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamondAllocation_CompDivision" Association="MembersModel.FK_CompDiamondAllocation_CompDivision">
+            <End Role="CompDivision" EntitySet="CompDivisions" />
+            <End Role="CompDiamondAllocation" EntitySet="CompDiamondAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDiamondAllocation_CompTimeslot" Association="MembersModel.FK_CompDiamondAllocation_CompTimeslot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlots" />
+            <End Role="CompDiamondAllocation" EntitySet="CompDiamondAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompDivision_CompGroup" Association="MembersModel.FK_CompDivision_CompGroup">
+            <End Role="CompGroup" EntitySet="CompGroups" />
+            <End Role="CompDivision" EntitySet="CompDivisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompDivision" Association="MembersModel.FK_CompTeam_CompDivision">
+            <End Role="CompDivision" EntitySet="CompDivisions" />
+            <End Role="CompTeam" EntitySet="CompTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompAwayTeam" Association="MembersModel.FK_CompFixture_CompAwayTeam">
+            <End Role="CompTeam" EntitySet="CompTeams" />
+            <End Role="CompFixture" EntitySet="CompFixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompHomeTeam" Association="MembersModel.FK_CompFixture_CompHomeTeam">
+            <End Role="CompTeam" EntitySet="CompTeams" />
+            <End Role="CompFixture" EntitySet="CompFixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixture_CompTimeSlot" Association="MembersModel.FK_CompFixture_CompTimeSlot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlots" />
+            <End Role="CompFixture" EntitySet="CompFixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompFixtureTemplate_CompType" Association="MembersModel.FK_CompFixtureTemplate_CompType">
+            <End Role="CompType" EntitySet="CompTypes" />
+            <End Role="CompFixtureTemplate" EntitySet="CompFixtureTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompTeam_CompGroup" Association="MembersModel.FK_CompTeam_CompGroup">
+            <End Role="CompGroup" EntitySet="CompGroups" />
+            <End Role="CompTeam" EntitySet="CompTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompUmpireAllocation_CompTimeSlot" Association="MembersModel.FK_CompUmpireAllocation_CompTimeSlot">
+            <End Role="CompTimeSlot" EntitySet="CompTimeSlots" />
+            <End Role="CompUmpireAllocation" EntitySet="CompUmpireAllocations" />
+          </AssociationSet>
+          <EntitySet Name="BasicLadders" EntityType="MembersModel.BasicLadder" />
+          <EntitySet Name="ClubContactViews" EntityType="MembersModel.ClubContactView" />
+          <EntitySet Name="FullLadders" EntityType="MembersModel.FullLadder" />
+          <EntitySet Name="TeamLadderAndGames" EntityType="MembersModel.TeamLadderAndGame" />
+          <EntitySet Name="TeamLadderAndGames_Crosstab" EntityType="MembersModel.TeamLadderAndGames_Crosstab" />
+          <EntitySet Name="ScoreSlips" EntityType="MembersModel.ScoreSlip" />
+          <EntitySet Name="CalculateFinalRoundFixtures_Lightning" EntityType="MembersModel.CalculateFinalRoundFixtures_Lightning" />
+          <EntitySet Name="FullLadderFinalRounds" EntityType="MembersModel.FullLadderFinalRound" />
+        </EntityContainer>
+        <EntityType Name="ClubRolePerson">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="MembersModel.ClubRolePerson_FK1" FromRole="ClubRolePerson" ToRole="Club" />
+          <NavigationProperty Name="Role" Relationship="MembersModel.ClubRolePerson_FK2" FromRole="ClubRolePerson" ToRole="Role" />
+          <NavigationProperty Name="Person" Relationship="MembersModel.ClubRolePerson_FK3" FromRole="ClubRolePerson" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Comp">
+          <Key>
+            <PropertyRef Name="CompID" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompTypeID" Type="Int32" Nullable="false" />
+          <Property Name="HostClubID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="MembersModel.FK_Comp_Club" FromRole="Comp" ToRole="Club" />
+          <NavigationProperty Name="Comp1" Relationship="MembersModel.FK_Comp_Comp" FromRole="Comp" ToRole="Comp1" />
+          <NavigationProperty Name="Comp2" Relationship="MembersModel.FK_Comp_Comp" FromRole="Comp1" ToRole="Comp" />
+          <NavigationProperty Name="CompType" Relationship="MembersModel.FK_Comp_CompType" FromRole="Comp" ToRole="CompType" />
+          <NavigationProperty Name="CompClubs" Relationship="MembersModel.FK_CompClub_Comp" FromRole="Comp" ToRole="CompClub" />
+          <NavigationProperty Name="CompDates" Relationship="MembersModel.FK_CompDate_Comp" FromRole="Comp" ToRole="CompDate" />
+          <NavigationProperty Name="CompDiamonds" Relationship="MembersModel.FK_CompDiamond_Comp" FromRole="Comp" ToRole="CompDiamond" />
+          <NavigationProperty Name="CompFixtures" Relationship="MembersModel.FK_CompFixture_Comp" FromRole="Comp" ToRole="CompFixture" />
+          <NavigationProperty Name="CompTeams" Relationship="MembersModel.FK_CompTeam_Comp" FromRole="Comp" ToRole="CompTeam" />
+        </EntityType>
+        <EntityType Name="CompClub">
+          <Key>
+            <PropertyRef Name="CompClubID" />
+          </Key>
+          <Property Name="CompClubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="ClubID" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Club" Relationship="MembersModel.FK_CompClub_Club" FromRole="CompClub" ToRole="Club" />
+          <NavigationProperty Name="Comp" Relationship="MembersModel.FK_CompClub_Comp" FromRole="CompClub" ToRole="Comp" />
+          <NavigationProperty Name="CompTeams" Relationship="MembersModel.FK_CompTeam_CompClub" FromRole="CompClub" ToRole="CompTeam" />
+        </EntityType>
+        <EntityType Name="CompDate">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Comp" Relationship="MembersModel.FK_CompDate_Comp" FromRole="CompDate" ToRole="Comp" />
+          <NavigationProperty Name="CompTimeSlots" Relationship="MembersModel.FK_CompTimeSlot_CompDate" FromRole="CompDate" ToRole="CompTimeSlot" />
+        </EntityType>
+        <EntityType Name="CompDiamond">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comp" Relationship="MembersModel.FK_CompDiamond_Comp" FromRole="CompDiamond" ToRole="Comp" />
+          <NavigationProperty Name="CompFixtures" Relationship="MembersModel.FK_CompFixture_CompDIamond" FromRole="CompDiamond" ToRole="CompFixture" />
+          <NavigationProperty Name="CompUmpireAllocations" Relationship="MembersModel.FK_CompUmpireAllocation_CompDiamond" FromRole="CompDiamond" ToRole="CompUmpireAllocation" />
+        </EntityType>
+        <EntityType Name="CompDiamondAllocation">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="DiamondNumber" />
+            <PropertyRef Name="GameNumber" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DiamondNumber" Type="Int32" Nullable="false" />
+          <Property Name="GameNumber" Type="Int32" Nullable="false" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompDivision" Relationship="MembersModel.FK_CompDiamondAllocation_CompDivision" FromRole="CompDiamondAllocation" ToRole="CompDivision" />
+          <NavigationProperty Name="CompTimeSlot" Relationship="MembersModel.FK_CompDiamondAllocation_CompTimeslot" FromRole="CompDiamondAllocation" ToRole="CompTimeSlot" />
+        </EntityType>
+        <EntityType Name="CompDivision">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Division" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompDiamondAllocations" Relationship="MembersModel.FK_CompDiamondAllocation_CompDivision" FromRole="CompDivision" ToRole="CompDiamondAllocation" />
+          <NavigationProperty Name="CompGroup" Relationship="MembersModel.FK_CompDivision_CompGroup" FromRole="CompDivision" ToRole="CompGroup" />
+          <NavigationProperty Name="CompTeams" Relationship="MembersModel.FK_CompTeam_CompDivision" FromRole="CompDivision" ToRole="CompTeam" />
+        </EntityType>
+        <EntityType Name="CompFixture">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <Property Name="Game" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeamID" Type="Int32" />
+          <Property Name="AwayTeamID" Type="Int32" />
+          <Property Name="HomeTeamMatchCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="HomeTeamWinLoss" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AwayTeamMatchCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AwayTeamWinLoss" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="HomeTeamRuns" Type="Int32" />
+          <Property Name="AwayTeamRuns" Type="Int32" />
+          <Property Name="PlateUmpireNo" Type="Int32" />
+          <Property Name="FirstBaseUmpireNo" Type="Int32" />
+          <Property Name="SecondBaseUmpireNo" Type="Int32" />
+          <NavigationProperty Name="Comp" Relationship="MembersModel.FK_CompFixture_Comp" FromRole="CompFixture" ToRole="Comp" />
+          <NavigationProperty Name="CompDiamond" Relationship="MembersModel.FK_CompFixture_CompDIamond" FromRole="CompFixture" ToRole="CompDiamond" />
+          <NavigationProperty Name="AwayTeam" Relationship="MembersModel.FK_CompFixture_CompAwayTeam" FromRole="CompFixture" ToRole="CompTeam" />
+          <NavigationProperty Name="HomeTeam" Relationship="MembersModel.FK_CompFixture_CompHomeTeam" FromRole="CompFixture" ToRole="CompTeam" />
+          <NavigationProperty Name="CompTimeSlot" Relationship="MembersModel.FK_CompFixture_CompTimeSlot" FromRole="CompFixture" ToRole="CompTimeSlot" />
+        </EntityType>
+        <EntityType Name="CompFixtureTemplate">
+          <Key>
+            <PropertyRef Name="CompTypeID" />
+            <PropertyRef Name="NumberOfTeams" />
+            <PropertyRef Name="GameNumber" />
+            <PropertyRef Name="DiamondNumber" />
+          </Key>
+          <Property Name="CompTypeID" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfTeams" Type="Int32" Nullable="false" />
+          <Property Name="GameNumber" Type="Int32" Nullable="false" />
+          <Property Name="DiamondNumber" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeamRank" Type="Int32" Nullable="false" />
+          <Property Name="AwayTeamRank" Type="Int32" Nullable="false" />
+          <Property Name="MatchCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="HomeTeamMatchCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="HomeTeamWinLoss" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AwayTeamMatchCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AwayTeamWinLoss" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CompType" Relationship="MembersModel.FK_CompFixtureTemplate_CompType" FromRole="CompFixtureTemplate" ToRole="CompType" />
+        </EntityType>
+        <EntityType Name="CompGroup">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompDivisions" Relationship="MembersModel.FK_CompDivision_CompGroup" FromRole="CompGroup" ToRole="CompDivision" />
+          <NavigationProperty Name="CompTeams" Relationship="MembersModel.FK_CompTeam_CompGroup" FromRole="CompGroup" ToRole="CompTeam" />
+        </EntityType>
+        <EntityType Name="CompTeam">
+          <Key>
+            <PropertyRef Name="CompTeamID" />
+          </Key>
+          <Property Name="CompTeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="CompClubID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Rank" Type="Int32" />
+          <NavigationProperty Name="Comp" Relationship="MembersModel.FK_CompTeam_Comp" FromRole="CompTeam" ToRole="Comp" />
+          <NavigationProperty Name="CompClub" Relationship="MembersModel.FK_CompTeam_CompClub" FromRole="CompTeam" ToRole="CompClub" />
+          <NavigationProperty Name="CompDivision" Relationship="MembersModel.FK_CompTeam_CompDivision" FromRole="CompTeam" ToRole="CompDivision" />
+          <NavigationProperty Name="CompFixtures" Relationship="MembersModel.FK_CompFixture_CompAwayTeam" FromRole="CompTeam" ToRole="CompFixture" />
+          <NavigationProperty Name="CompFixtures1" Relationship="MembersModel.FK_CompFixture_CompHomeTeam" FromRole="CompTeam" ToRole="CompFixture" />
+          <NavigationProperty Name="CompGroup" Relationship="MembersModel.FK_CompTeam_CompGroup" FromRole="CompTeam" ToRole="CompGroup" />
+        </EntityType>
+        <EntityType Name="CompTimeSlot">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Day" Type="Int32" Nullable="false" />
+          <Property Name="TimeSlotInDay" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="CompDate" Relationship="MembersModel.FK_CompTimeSlot_CompDate" FromRole="CompTimeSlot" ToRole="CompDate" />
+          <NavigationProperty Name="CompDiamondAllocations" Relationship="MembersModel.FK_CompDiamondAllocation_CompTimeslot" FromRole="CompTimeSlot" ToRole="CompDiamondAllocation" />
+          <NavigationProperty Name="CompFixtures" Relationship="MembersModel.FK_CompFixture_CompTimeSlot" FromRole="CompTimeSlot" ToRole="CompFixture" />
+          <NavigationProperty Name="CompUmpireAllocations" Relationship="MembersModel.FK_CompUmpireAllocation_CompTimeSlot" FromRole="CompTimeSlot" ToRole="CompUmpireAllocation" />
+        </EntityType>
+        <EntityType Name="CompType">
+          <Key>
+            <PropertyRef Name="CompTypeID" />
+          </Key>
+          <Property Name="CompTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comps" Relationship="MembersModel.FK_Comp_CompType" FromRole="CompType" ToRole="Comp" />
+          <NavigationProperty Name="CompFixtureTemplates" Relationship="MembersModel.FK_CompFixtureTemplate_CompType" FromRole="CompType" ToRole="CompFixtureTemplate" />
+        </EntityType>
+        <EntityType Name="CompUmpireAllocation">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <Property Name="PlateUmpireCompTeamID" Type="Int32" Nullable="false" />
+          <Property Name="FirstBaseUmpireCompTeamID" Type="Int32" />
+          <Property Name="SecondBaseUmpireCompTeamID" Type="Int32" />
+          <NavigationProperty Name="CompDiamond" Relationship="MembersModel.FK_CompUmpireAllocation_CompDiamond" FromRole="CompUmpireAllocation" ToRole="CompDiamond" />
+          <NavigationProperty Name="CompTimeSlot" Relationship="MembersModel.FK_CompUmpireAllocation_CompTimeSlot" FromRole="CompUmpireAllocation" ToRole="CompTimeSlot" />
+        </EntityType>
+        <Association Name="ClubRolePerson_FK1">
+          <End Type="MembersModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="MembersModel.ClubRolePerson" Role="ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_Club">
+          <End Type="MembersModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Comp">
+              <PropertyRef Name="HostClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompClub_Club">
+          <End Type="MembersModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="MembersModel.CompClub" Role="CompClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="CompClub">
+              <PropertyRef Name="ClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubRolePerson_FK2">
+          <End Type="MembersModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="MembersModel.ClubRolePerson" Role="ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClubRolePerson_FK3">
+          <End Type="MembersModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="MembersModel.ClubRolePerson" Role="ClubRolePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="ClubRolePerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.Comp" Role="Comp1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="Comp1">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comp_CompType">
+          <End Type="MembersModel.CompType" Role="CompType" Multiplicity="1" />
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompType">
+              <PropertyRef Name="CompTypeID" />
+            </Principal>
+            <Dependent Role="Comp">
+              <PropertyRef Name="CompTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompClub_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.CompClub" Role="CompClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompClub">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDate_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.CompDate" Role="CompDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompDate">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamond_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.CompDiamond" Role="CompDiamond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.CompFixture" Role="CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_Comp">
+          <End Type="MembersModel.Comp" Role="Comp" Multiplicity="1" />
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comp">
+              <PropertyRef Name="CompID" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompClub">
+          <End Type="MembersModel.CompClub" Role="CompClub" Multiplicity="1" />
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompClub">
+              <PropertyRef Name="CompClubID" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompClubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTimeSlot_CompDate">
+          <End Type="MembersModel.CompDate" Role="CompDate" Multiplicity="1" />
+          <End Type="MembersModel.CompTimeSlot" Role="CompTimeSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDate">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompDIamond">
+          <End Type="MembersModel.CompDiamond" Role="CompDiamond" Multiplicity="1" />
+          <End Type="MembersModel.CompFixture" Role="CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompUmpireAllocation_CompDiamond">
+          <End Type="MembersModel.CompDiamond" Role="CompDiamond" Multiplicity="1" />
+          <End Type="MembersModel.CompUmpireAllocation" Role="CompUmpireAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDiamond">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Principal>
+            <Dependent Role="CompUmpireAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Diamond" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamondAllocation_CompDivision">
+          <End Type="MembersModel.CompDivision" Role="CompDivision" Multiplicity="1" />
+          <End Type="MembersModel.CompDiamondAllocation" Role="CompDiamondAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="CompDiamondAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDiamondAllocation_CompTimeslot">
+          <End Type="MembersModel.CompTimeSlot" Role="CompTimeSlot" Multiplicity="1" />
+          <End Type="MembersModel.CompDiamondAllocation" Role="CompDiamondAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompDiamondAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompDivision_CompGroup">
+          <End Type="MembersModel.CompGroup" Role="CompGroup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MembersModel.CompDivision" Role="CompDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompGroup">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompDivision">
+          <End Type="MembersModel.CompDivision" Role="CompDivision" Multiplicity="0..1" />
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompDivision">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+              <PropertyRef Name="Division" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompAwayTeam">
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="0..1" />
+          <End Type="MembersModel.CompFixture" Role="CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTeam">
+              <PropertyRef Name="CompTeamID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="AwayTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompHomeTeam">
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="0..1" />
+          <End Type="MembersModel.CompFixture" Role="CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTeam">
+              <PropertyRef Name="CompTeamID" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="HomeTeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixture_CompTimeSlot">
+          <End Type="MembersModel.CompTimeSlot" Role="CompTimeSlot" Multiplicity="1" />
+          <End Type="MembersModel.CompFixture" Role="CompFixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompFixture">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompFixtureTemplate_CompType">
+          <End Type="MembersModel.CompType" Role="CompType" Multiplicity="1" />
+          <End Type="MembersModel.CompFixtureTemplate" Role="CompFixtureTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompType">
+              <PropertyRef Name="CompTypeID" />
+            </Principal>
+            <Dependent Role="CompFixtureTemplate">
+              <PropertyRef Name="CompTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompTeam_CompGroup">
+          <End Type="MembersModel.CompGroup" Role="CompGroup" Multiplicity="0..1" />
+          <End Type="MembersModel.CompTeam" Role="CompTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompGroup">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="CompTeam">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="GroupName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompUmpireAllocation_CompTimeSlot">
+          <End Type="MembersModel.CompTimeSlot" Role="CompTimeSlot" Multiplicity="1" />
+          <End Type="MembersModel.CompUmpireAllocation" Role="CompUmpireAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompTimeSlot">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Principal>
+            <Dependent Role="CompUmpireAllocation">
+              <PropertyRef Name="CompID" />
+              <PropertyRef Name="TimeSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BasicLadder">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="CompTeamID" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="CompTeamID" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="GamesPlayed" Type="Int32" />
+          <Property Name="GamesWon" Type="Int32" />
+          <Property Name="GamesLost" Type="Int32" />
+          <Property Name="GamesDrawn" Type="Int32" />
+          <Property Name="RunsFor" Type="Int32" />
+          <Property Name="RunsAgainst" Type="Int32" />
+          <Property Name="Percentage" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="ClubContactView">
+          <Key>
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+          </Key>
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FullLadder">
+          <Key>
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+          </Key>
+          <Property Name="CompID" Type="Int32" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="GamesPlayed" Type="Int32" />
+          <Property Name="GamesWon" Type="Int32" />
+          <Property Name="GamesLost" Type="Int32" />
+          <Property Name="GamesDrawn" Type="Int32" />
+          <Property Name="RunsFor" Type="Int32" />
+          <Property Name="RunsAgainst" Type="Int32" />
+          <Property Name="Percentage" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="TeamLadderAndGame">
+          <Key>
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="GamesPlayed" Type="Int32" />
+          <Property Name="GamesWon" Type="Int32" />
+          <Property Name="GamesLost" Type="Int32" />
+          <Property Name="GamesDrawn" Type="Int32" />
+          <Property Name="RunsFor" Type="Int32" />
+          <Property Name="RunsAgainst" Type="Int32" />
+          <Property Name="Percentage" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Game" Type="Int32" Nullable="false" />
+          <Property Name="TeamRuns" Type="Int32" />
+          <Property Name="OppositionRuns" Type="Int32" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="CompID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TeamLadderAndGames_Crosstab">
+          <Key>
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="GamesPlayed" Type="Int32" />
+          <Property Name="GamesWon" Type="Int32" />
+          <Property Name="GamesLost" Type="Int32" />
+          <Property Name="GamesDrawn" Type="Int32" />
+          <Property Name="RunsFor" Type="Int32" />
+          <Property Name="RunsAgainst" Type="Int32" />
+          <Property Name="Percentage" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="CompID" Type="Int32" />
+          <Property Name="ID1" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="ID2" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="ID3" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ScoreSlip">
+          <Key>
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="Diamond" />
+            <PropertyRef Name="Grade" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="HomeTeam" />
+            <PropertyRef Name="MatchCode" />
+            <PropertyRef Name="CompID" />
+          </Key>
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Game" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeam" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AwayTeam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MatchCode" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalculateFinalRoundFixtures_Lightning">
+          <Key>
+            <PropertyRef Name="TimeSlot" />
+            <PropertyRef Name="Diamond" />
+            <PropertyRef Name="Game" />
+            <PropertyRef Name="HomeTeamID" />
+            <PropertyRef Name="AwayTeamID" />
+          </Key>
+          <Property Name="CompID" Type="Int32" />
+          <Property Name="TimeSlot" Type="Int32" Nullable="false" />
+          <Property Name="Diamond" Type="Int32" Nullable="false" />
+          <Property Name="Game" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeamID" Type="Int32" Nullable="false" />
+          <Property Name="AwayTeamID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FullLadderFinalRound">
+          <Key>
+            <PropertyRef Name="CompID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="TeamName" />
+            <PropertyRef Name="ClubName" />
+          </Key>
+          <Property Name="CompID" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Division" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FinalGame" Type="Int32" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="GamesPlayed" Type="Int32" />
+          <Property Name="GamesWon" Type="Int32" />
+          <Property Name="GamesLost" Type="Int32" />
+          <Property Name="GamesDrawn" Type="Int32" />
+          <Property Name="RunsFor" Type="Int32" />
+          <Property Name="RunsAgainst" Type="Int32" />
+          <Property Name="Percentage" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MembersModelStoreContainer" CdmEntityContainer="tbawaEntities">
+          <EntitySetMapping Name="Affiliations">
+            <EntityTypeMapping TypeName="MembersModel.Affiliation">
+              <MappingFragment StoreEntitySet="Affiliation">
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="AffiliationDate" ColumnName="AffiliationDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="NumberOfTeams" ColumnName="NumberOfTeams" />
+                <ScalarProperty Name="NumberOfPlayers" ColumnName="NumberOfPlayers" />
+                <ScalarProperty Name="NumberOfVolunteers" ColumnName="NumberOfVolunteers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="MembersModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="FacebookURL" ColumnName="FacebookURL" />
+                <ScalarProperty Name="MemberClub" ColumnName="MemberClub" />
+                <ScalarProperty Name="CountryClub" ColumnName="CountryClub" />
+                <ScalarProperty Name="MemberOf" ColumnName="MemberOf" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="Locality" ColumnName="Locality" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubContacts">
+            <EntityTypeMapping TypeName="MembersModel.ClubContact">
+              <MappingFragment StoreEntitySet="ClubContact">
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeBearers">
+            <EntityTypeMapping TypeName="MembersModel.OfficeBearer">
+              <MappingFragment StoreEntitySet="OfficeBearer">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="MembersModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Deceased" ColumnName="Deceased" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="Locality" ColumnName="Locality" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MembersModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="TbawaOnly" ColumnName="TbawaOnly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="MembersModel.Season">
+              <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubRolePersons">
+            <EntityTypeMapping TypeName="MembersModel.ClubRolePerson">
+              <MappingFragment StoreEntitySet="ClubRolePerson">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comps">
+            <EntityTypeMapping TypeName="MembersModel.Comp">
+              <MappingFragment StoreEntitySet="Comp">
+                <ScalarProperty Name="CompName" ColumnName="CompName" />
+                <ScalarProperty Name="HostClubID" ColumnName="HostClubID" />
+                <ScalarProperty Name="CompTypeID" ColumnName="CompTypeID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompClubs">
+            <EntityTypeMapping TypeName="MembersModel.CompClub">
+              <MappingFragment StoreEntitySet="CompClub">
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompClubID" ColumnName="CompClubID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompDates">
+            <EntityTypeMapping TypeName="MembersModel.CompDate">
+              <MappingFragment StoreEntitySet="CompDate">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompDiamonds">
+            <EntityTypeMapping TypeName="MembersModel.CompDiamond">
+              <MappingFragment StoreEntitySet="CompDiamond">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompDiamondAllocations">
+            <EntityTypeMapping TypeName="MembersModel.CompDiamondAllocation">
+              <MappingFragment StoreEntitySet="CompDiamondAllocation">
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+                <ScalarProperty Name="DiamondNumber" ColumnName="DiamondNumber" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompDivisions">
+            <EntityTypeMapping TypeName="MembersModel.CompDivision">
+              <MappingFragment StoreEntitySet="CompDivision">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompFixtures">
+            <EntityTypeMapping TypeName="MembersModel.CompFixture">
+              <MappingFragment StoreEntitySet="CompFixture">
+                <ScalarProperty Name="SecondBaseUmpireNo" ColumnName="SecondBaseUmpireNo" />
+                <ScalarProperty Name="FirstBaseUmpireNo" ColumnName="FirstBaseUmpireNo" />
+                <ScalarProperty Name="PlateUmpireNo" ColumnName="PlateUmpireNo" />
+                <ScalarProperty Name="AwayTeamRuns" ColumnName="AwayTeamRuns" />
+                <ScalarProperty Name="HomeTeamRuns" ColumnName="HomeTeamRuns" />
+                <ScalarProperty Name="AwayTeamWinLoss" ColumnName="AwayTeamWinLoss" />
+                <ScalarProperty Name="AwayTeamMatchCode" ColumnName="AwayTeamMatchCode" />
+                <ScalarProperty Name="HomeTeamWinLoss" ColumnName="HomeTeamWinLoss" />
+                <ScalarProperty Name="HomeTeamMatchCode" ColumnName="HomeTeamMatchCode" />
+                <ScalarProperty Name="AwayTeamID" ColumnName="AwayTeamID" />
+                <ScalarProperty Name="HomeTeamID" ColumnName="HomeTeamID" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompFixtureTemplates">
+            <EntityTypeMapping TypeName="MembersModel.CompFixtureTemplate">
+              <MappingFragment StoreEntitySet="CompFixtureTemplate">
+                <ScalarProperty Name="AwayTeamWinLoss" ColumnName="AwayTeamWinLoss" />
+                <ScalarProperty Name="AwayTeamMatchCode" ColumnName="AwayTeamMatchCode" />
+                <ScalarProperty Name="HomeTeamWinLoss" ColumnName="HomeTeamWinLoss" />
+                <ScalarProperty Name="HomeTeamMatchCode" ColumnName="HomeTeamMatchCode" />
+                <ScalarProperty Name="MatchCode" ColumnName="MatchCode" />
+                <ScalarProperty Name="AwayTeamRank" ColumnName="AwayTeamRank" />
+                <ScalarProperty Name="HomeTeamRank" ColumnName="HomeTeamRank" />
+                <ScalarProperty Name="DiamondNumber" ColumnName="DiamondNumber" />
+                <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+                <ScalarProperty Name="NumberOfTeams" ColumnName="NumberOfTeams" />
+                <ScalarProperty Name="CompTypeID" ColumnName="CompTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompGroups">
+            <EntityTypeMapping TypeName="MembersModel.CompGroup">
+              <MappingFragment StoreEntitySet="CompGroup">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompTeams">
+            <EntityTypeMapping TypeName="MembersModel.CompTeam">
+              <MappingFragment StoreEntitySet="CompTeam">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompClubID" ColumnName="CompClubID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="CompTeamID" ColumnName="CompTeamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompTimeSlots">
+            <EntityTypeMapping TypeName="MembersModel.CompTimeSlot">
+              <MappingFragment StoreEntitySet="CompTimeSlot">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="TimeSlotInDay" ColumnName="TimeSlotInDay" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompTypes">
+            <EntityTypeMapping TypeName="MembersModel.CompType">
+              <MappingFragment StoreEntitySet="CompType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompTypeID" ColumnName="CompTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompUmpireAllocations">
+            <EntityTypeMapping TypeName="MembersModel.CompUmpireAllocation">
+              <MappingFragment StoreEntitySet="CompUmpireAllocation">
+                <ScalarProperty Name="SecondBaseUmpireCompTeamID" ColumnName="SecondBaseUmpireCompTeamID" />
+                <ScalarProperty Name="FirstBaseUmpireCompTeamID" ColumnName="FirstBaseUmpireCompTeamID" />
+                <ScalarProperty Name="PlateUmpireCompTeamID" ColumnName="PlateUmpireCompTeamID" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BasicLadders">
+            <EntityTypeMapping TypeName="MembersModel.BasicLadder">
+              <MappingFragment StoreEntitySet="BasicLadder">
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="RunsAgainst" ColumnName="RunsAgainst" />
+                <ScalarProperty Name="RunsFor" ColumnName="RunsFor" />
+                <ScalarProperty Name="GamesDrawn" ColumnName="GamesDrawn" />
+                <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+                <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+                <ScalarProperty Name="GamesPlayed" ColumnName="GamesPlayed" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CompTeamID" ColumnName="CompTeamID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubContactViews">
+            <EntityTypeMapping TypeName="MembersModel.ClubContactView">
+              <MappingFragment StoreEntitySet="ClubContactView">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FullLadders">
+            <EntityTypeMapping TypeName="MembersModel.FullLadder">
+              <MappingFragment StoreEntitySet="FullLadder">
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="RunsAgainst" ColumnName="RunsAgainst" />
+                <ScalarProperty Name="RunsFor" ColumnName="RunsFor" />
+                <ScalarProperty Name="GamesDrawn" ColumnName="GamesDrawn" />
+                <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+                <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+                <ScalarProperty Name="GamesPlayed" ColumnName="GamesPlayed" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamLadderAndGames">
+            <EntityTypeMapping TypeName="MembersModel.TeamLadderAndGame">
+              <MappingFragment StoreEntitySet="TeamLadderAndGames">
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="OppositionRuns" ColumnName="OppositionRuns" />
+                <ScalarProperty Name="TeamRuns" ColumnName="TeamRuns" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="RunsAgainst" ColumnName="RunsAgainst" />
+                <ScalarProperty Name="RunsFor" ColumnName="RunsFor" />
+                <ScalarProperty Name="GamesDrawn" ColumnName="GamesDrawn" />
+                <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+                <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+                <ScalarProperty Name="GamesPlayed" ColumnName="GamesPlayed" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamLadderAndGames_Crosstab">
+            <EntityTypeMapping TypeName="MembersModel.TeamLadderAndGames_Crosstab">
+              <MappingFragment StoreEntitySet="TeamLadderAndGames_Crosstab">
+                <ScalarProperty Name="ID3" ColumnName="ID3" />
+                <ScalarProperty Name="ID2" ColumnName="ID2" />
+                <ScalarProperty Name="ID1" ColumnName="ID1" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="RunsAgainst" ColumnName="RunsAgainst" />
+                <ScalarProperty Name="RunsFor" ColumnName="RunsFor" />
+                <ScalarProperty Name="GamesDrawn" ColumnName="GamesDrawn" />
+                <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+                <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+                <ScalarProperty Name="GamesPlayed" ColumnName="GamesPlayed" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScoreSlips">
+            <EntityTypeMapping TypeName="MembersModel.ScoreSlip">
+              <MappingFragment StoreEntitySet="ScoreSlips">
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="MatchCode" ColumnName="MatchCode" />
+                <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+                <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalculateFinalRoundFixtures_Lightning">
+            <EntityTypeMapping TypeName="MembersModel.CalculateFinalRoundFixtures_Lightning">
+              <MappingFragment StoreEntitySet="CalculateFinalRoundFixtures_Lightning">
+                <ScalarProperty Name="AwayTeamID" ColumnName="AwayTeamID" />
+                <ScalarProperty Name="HomeTeamID" ColumnName="HomeTeamID" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="Diamond" ColumnName="Diamond" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FullLadderFinalRounds">
+            <EntityTypeMapping TypeName="MembersModel.FullLadderFinalRound">
+              <MappingFragment StoreEntitySet="FullLadderFinalRound">
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="RunsAgainst" ColumnName="RunsAgainst" />
+                <ScalarProperty Name="RunsFor" ColumnName="RunsFor" />
+                <ScalarProperty Name="GamesDrawn" ColumnName="GamesDrawn" />
+                <ScalarProperty Name="GamesLost" ColumnName="GamesLost" />
+                <ScalarProperty Name="GamesWon" ColumnName="GamesWon" />
+                <ScalarProperty Name="GamesPlayed" ColumnName="GamesPlayed" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="FinalGame" ColumnName="FinalGame" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

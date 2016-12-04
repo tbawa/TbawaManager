@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Reports Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Reports for Lightning Carnival</h1>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-default" href="/Reports/Results">Results for Games 1-3</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <form action="/Reports/ScoreSlips" method="get"><input type="submit" class="btn btn-default" value="Score Slips"> for time slot (1-8) <input type="text" name="timeSlot" /> (optional)</form>
+    </div>
+</div>

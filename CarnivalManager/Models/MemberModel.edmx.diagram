@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9133a16c956d4c50b147f4f86d6dccbf" Name="Diagram1">
+        <EntityTypeShape EntityType="MembersModel.Affiliation" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.Club" Width="1.5" PointX="3.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.ClubContact" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.OfficeBearer" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.Person" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.Role" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MembersModel.Season" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="MembersModel.Affiliation_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.Affiliation_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.Club_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.ClubContact_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.ClubContact_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.ClubContact_FK3" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.OfficeBearer_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="MembersModel.OfficeBearer_FK2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MembersModel.ClubRolePerson" Width="1.5" PointX="6" PointY="8.625" />
+        <EntityTypeShape EntityType="MembersModel.Comp" Width="1.5" PointX="13.625" PointY="9.5" />
+        <EntityTypeShape EntityType="MembersModel.CompClub" Width="1.5" PointX="15.875" PointY="8" />
+        <EntityTypeShape EntityType="MembersModel.CompDate" Width="1.5" PointX="15.875" PointY="15.125" />
+        <EntityTypeShape EntityType="MembersModel.CompDiamond" Width="1.5" PointX="15.875" PointY="11.5" />
+        <EntityTypeShape EntityType="MembersModel.CompDiamondAllocation" Width="1.5" PointX="20.375" PointY="16.625" />
+        <EntityTypeShape EntityType="MembersModel.CompDivision" Width="1.5" PointX="15.875" PointY="4.375" />
+        <EntityTypeShape EntityType="MembersModel.CompFixture" Width="1.5" PointX="20.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MembersModel.CompFixtureTemplate" Width="1.5" PointX="10.625" PointY="9.375" />
+        <EntityTypeShape EntityType="MembersModel.CompGroup" Width="1.5" PointX="13.625" PointY="4.375" />
+        <EntityTypeShape EntityType="MembersModel.CompTeam" Width="1.5" PointX="18.125" PointY="8.625" />
+        <EntityTypeShape EntityType="MembersModel.CompTimeSlot" Width="1.5" PointX="18.125" PointY="14.5" />
+        <EntityTypeShape EntityType="MembersModel.CompType" Width="1.5" PointX="8.375" PointY="10.125" />
+        <EntityTypeShape EntityType="MembersModel.CompUmpireAllocation" Width="1.5" PointX="20.375" PointY="13.25" />
+        <AssociationConnector Association="MembersModel.ClubRolePerson_FK1" />
+        <AssociationConnector Association="MembersModel.FK_Comp_Club" />
+        <AssociationConnector Association="MembersModel.FK_CompClub_Club" />
+        <AssociationConnector Association="MembersModel.ClubRolePerson_FK2" />
+        <AssociationConnector Association="MembersModel.ClubRolePerson_FK3" />
+        <AssociationConnector Association="MembersModel.FK_Comp_Comp" />
+        <AssociationConnector Association="MembersModel.FK_Comp_CompType" />
+        <AssociationConnector Association="MembersModel.FK_CompClub_Comp" />
+        <AssociationConnector Association="MembersModel.FK_CompDate_Comp" />
+        <AssociationConnector Association="MembersModel.FK_CompDiamond_Comp" />
+        <AssociationConnector Association="MembersModel.FK_CompFixture_Comp" />
+        <AssociationConnector Association="MembersModel.FK_CompTeam_Comp" />
+        <AssociationConnector Association="MembersModel.FK_CompTeam_CompClub" />
+        <AssociationConnector Association="MembersModel.FK_CompTimeSlot_CompDate" />
+        <AssociationConnector Association="MembersModel.FK_CompFixture_CompDIamond" />
+        <AssociationConnector Association="MembersModel.FK_CompUmpireAllocation_CompDiamond" />
+        <AssociationConnector Association="MembersModel.FK_CompDiamondAllocation_CompDivision" />
+        <AssociationConnector Association="MembersModel.FK_CompDiamondAllocation_CompTimeslot" />
+        <AssociationConnector Association="MembersModel.FK_CompDivision_CompGroup" />
+        <AssociationConnector Association="MembersModel.FK_CompTeam_CompDivision" />
+        <AssociationConnector Association="MembersModel.FK_CompFixture_CompAwayTeam" />
+        <AssociationConnector Association="MembersModel.FK_CompFixture_CompHomeTeam" />
+        <AssociationConnector Association="MembersModel.FK_CompFixture_CompTimeSlot" />
+        <AssociationConnector Association="MembersModel.FK_CompFixtureTemplate_CompType" />
+        <AssociationConnector Association="MembersModel.FK_CompTeam_CompGroup" />
+        <AssociationConnector Association="MembersModel.FK_CompUmpireAllocation_CompTimeSlot" />
+        <EntityTypeShape EntityType="MembersModel.BasicLadder" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MembersModel.ClubContactView" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="MembersModel.FullLadder" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MembersModel.TeamLadderAndGame" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="MembersModel.TeamLadderAndGames_Crosstab" Width="1.5" PointX="6.75" PointY="13.75" />
+        <EntityTypeShape EntityType="MembersModel.ScoreSlip" Width="1.5" PointX="9.375" PointY="13.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

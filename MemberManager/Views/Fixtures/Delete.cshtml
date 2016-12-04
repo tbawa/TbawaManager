@@ -1,0 +1,145 @@
+﻿@model MemberManager.Models.CompFixture
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_CarnivalManagerLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CompFixture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Game)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeTeamMatchCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeTeamMatchCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeTeamWinLoss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeTeamWinLoss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayTeamMatchCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayTeamMatchCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayTeamWinLoss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayTeamWinLoss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeTeamRuns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeTeamRuns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayTeamRuns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayTeamRuns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlateUmpireNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlateUmpireNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstBaseUmpireNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstBaseUmpireNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondBaseUmpireNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondBaseUmpireNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comp.CompName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comp.CompName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompDiamond.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompDiamond.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompTeam.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompTeam.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompTeam1.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompTeam1.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompTimeSlot.CompID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompTimeSlot.CompID)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
